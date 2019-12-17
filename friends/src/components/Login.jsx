@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import axiosWithAuth from "./axios";
 
 const initialForm = {
   username: "",
   password: ""
 };
-export default function Login() {
+export default function Login(props) {
   const [loginForm, setLoginForm] = useState(initialForm);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onInputChange = evt => {
     setLoginForm({
@@ -16,7 +18,15 @@ export default function Login() {
 
   const submit = (evt) => {
     evt.preventDefault();
-  }
+
+    axiosWithAuth()
+      .post(`http://localhost:7000/api/login`, loginForm)
+      .then( res => {
+        localStorage.setItem('token', res.data.payload);
+        props.history.push("/dashboard")
+      })
+      .catch( err => alert(err.message));
+  };
 
   return (
     <div>
@@ -28,6 +38,7 @@ export default function Login() {
             id="username"
             type="text"
             name="username"
+            value={loginForm.username}
             onChange={onInputChange}
           />
         </label>
@@ -38,6 +49,7 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
+            value={loginForm.password}
             onChange={onInputChange}
           />
         </label>
