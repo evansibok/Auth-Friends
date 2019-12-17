@@ -12,11 +12,11 @@ function App() {
         path="/"
         component={Login}
       />
-      
       <PrivateRoute
         path="/dashboard"
         component={Dashboard}
       />
+
     </div>
   );
 }

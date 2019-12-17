@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import axiosWithAuth from "../axios";
+
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+
+import * as actionCreators from '../redux/actionCreators'
 
 const initialForm = {
   username: "",
   password: ""
 };
-export default function Login(props) {
+export function Login({ login }) {
+
+  const history = useHistory();
   const [loginForm, setLoginForm] = useState(initialForm);
-  const [isLoading, setIsLoading] = useState(false);
 
   const onInputChange = evt => {
     setLoginForm({
@@ -16,16 +21,9 @@ export default function Login(props) {
     });
   };
 
-  const onLogin = (evt) => {
+  const onLogin = evt => {
     evt.preventDefault();
-
-    axiosWithAuth()
-      .post(`http://localhost:7000/api/login`, loginForm)
-      .then( res => {
-        localStorage.setItem('token', res.data.payload);
-        props.history.push("/dashboard")
-      })
-      .catch( err => alert(err.message));
+    login(loginForm, history);
   };
 
   return (
@@ -60,3 +58,6 @@ export default function Login(props) {
     </div>
   );
 }
+
+
+export default connect(state => state, actionCreators)(Login);

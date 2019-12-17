@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 
 import * as actionCreators from '../redux/actionCreators'
 
-import axiosWithAuth from '../axios'
-
-export function Dashboard({friends, getFriends }) {
+export function Dashboard({ friends, getFriends }) {
   
   useEffect(() => {
     getFriends();
-  }, [])
+  }, [getFriends]);
 
   return (
     <div>
@@ -28,7 +26,7 @@ export function Dashboard({friends, getFriends }) {
 
 function mapStateToProps(state) {
   return {
-    friends: state.friends,
+    friends: state.friends
   }
 }
 export default connect(

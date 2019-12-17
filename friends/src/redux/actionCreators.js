@@ -1,6 +1,20 @@
 import * as types from './actionTypes';
 import axiosWithAuth from '../axios';
 
+
+export const login = (loginDetails, history) => dispatch => {
+  axiosWithAuth()
+    .post(`http://localhost:7000/api/login`, loginDetails)
+    .then(res => {
+      localStorage.setItem('token', res.data.payload);
+      history.push("/dashboard");
+      dispatch({
+        type: types.LOGIN
+      })
+    })
+    .catch(err => alert(err.message));
+}
+
 export const getFriends = () => dispatch => {
   axiosWithAuth()
     .get(`http://localhost:7000/api/friends`)
@@ -12,3 +26,4 @@ export const getFriends = () => dispatch => {
     })
     .catch(err => err.message);
 }
+

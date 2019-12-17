@@ -12,6 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import * as reducers from './redux/reducers';
 
 const rootReducer = combineReducers({
+  user: reducers.userReducer,
   friends: reducers.friendsReducer,
 })
 
