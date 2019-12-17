@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { connect } from 'react-redux';
 
 import axiosWithAuth from '../axios'
 
 export function Dashboard() {
-  const [friendsList, setFriendsList] = useState([]);
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`http://localhost:7000/api/friends`)
-  //     .then(res => {
-  //       debugger
-  //     })
-  //     .catch(err => {
-  //       debugger
-  //     });
-  // }, []);
+  
 
   return (
     <div>
