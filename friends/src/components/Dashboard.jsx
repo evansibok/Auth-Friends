@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
+
+import * as actionCreators from '../redux/actionCreators'
 
 import axiosWithAuth from '../axios'
 
-export function Dashboard() {
+export function Dashboard({friends, getFriends }) {
   
+  useEffect(() => {
+    getFriends();
+  }, [])
 
   return (
     <div>
-      {/* {friendsList.map(friend => {
+      {friends.map(friend => {
         return (
           <div key={friend.id}>
             <h2>{friend.name}</h2>
@@ -16,9 +21,17 @@ export function Dashboard() {
             <h4>{friend.email}</h4>
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+  return {
+    friends: state.friends,
+  }
+}
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(Dashboard);
