@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosWithAuth from "./axios";
+import axiosWithAuth from "../axios";
 
 const initialForm = {
   username: "",
@@ -16,7 +16,7 @@ export default function Login(props) {
     });
   };
 
-  const submit = (evt) => {
+  const onLogin = (evt) => {
     evt.preventDefault();
 
     axiosWithAuth()
@@ -30,7 +30,7 @@ export default function Login(props) {
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form onSubmit={onLogin}>
         <br />
         <label htmlFor="username">
           Username

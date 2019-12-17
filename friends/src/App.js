@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { withRouter, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
@@ -9,18 +9,23 @@ function App() {
     <div className="App">
       <Route
         exact
-        path="/login"
+        path="/"
         component={Login}
       />
-      <Route
-        exact
+      
+      <PrivateRoute
         path="/dashboard"
         component={Dashboard}
       />
-      {/* <Dashboard /> */}
-
     </div>
   );
 }
 
-export default App;
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => localStorage.getItem("token") ? (<Component {...props} />) : (<Redirect to="/" />)}
+  />
+)
+
+export default withRouter(App);

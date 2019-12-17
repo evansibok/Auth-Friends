@@ -5,7 +5,7 @@ export default function axiosWithAuth() {
 
   const instance = axios.create({
     "Content-Type": 'application/json',
-    Authorization: `${token}`,
+    'Authorization': token,
   })
   return instance;
 }
