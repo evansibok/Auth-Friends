@@ -12,7 +12,7 @@ export const login = (loginDetails, history) => dispatch => {
         type: types.LOGIN
       })
     })
-    .catch(err => alert(err.message));
+    .catch(err => err.message);
 }
 
 export const getFriends = () => dispatch => {

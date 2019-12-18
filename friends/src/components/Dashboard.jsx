@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../redux/actionCreators'
+import FriendsList from "./FriendsList";
 
 export function Dashboard({ friends, getFriends }) {
   
@@ -11,15 +12,7 @@ export function Dashboard({ friends, getFriends }) {
 
   return (
     <div>
-      {friends.map(friend => {
-        return (
-          <div key={friend.id}>
-            <h2>{friend.name}</h2>
-            <h4>{friend.age}</h4>
-            <h4>{friend.email}</h4>
-          </div>
-        );
-      })}
+      {friends.map(friend => <FriendsList friend={friend} />)}
     </div>
   );
 }
