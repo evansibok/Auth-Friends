@@ -1,13 +1,12 @@
 import React from 'react'
+import FriendCard from './FriendCard';
 
-const FriendsList = ({friend}) => {
+const FriendsList = ({friends}) => {
   return (
     <div>
-      <div key={friend.id}>
-        <h2>{friend.name}</h2>
-        <h4>{friend.age}</h4>
-        <h4>{friend.email}</h4>
-      </div>
+      {friends.map((friend, index) => (
+        <FriendCard key={index} friend={friend} />
+      ))}
     </div>
   );
 }

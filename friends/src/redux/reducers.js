@@ -5,6 +5,8 @@ export const friendsReducer = (friends = initialFriends, action) => {
   switch (action.type) {
     case types.GET_FRIENDS:
       return action.payload;
+    case types.ADD_FRIEND:
+      return [...friends, action.payload];
     default:
       return friends;
   }
